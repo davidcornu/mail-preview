@@ -9,28 +9,28 @@ var template = jade.compile(fs.readFileSync('./template.jade', 'utf-8'));
 
 (function(){
   var nodemailer = require('nodemailer');
-  nodemailer.Transport.transports.POSTMAN = PostmanTransport;
+  nodemailer.Transport.transports.MAILPREVIEW = MailPreviewTransport;
 })();
 
-function PostmanTransport(options){
+function MailPreviewTransport(options){
   options      = options || {};
   this.dir     = options.dir || path.join(process.cwd(), 'tmp', 'postman');
   this.browser = typeof options.browser == 'boolean' ? options.browser : true;
   mkdirp.sync(this.dir);
 }
 
-PostmanTransport.prototype.sendMail = function(mail, callback){
+MailPreviewTransport.prototype.sendMail = function(mail, callback){
   callback = callback || function(){};
   process.nextTick(function(){ this.process(mail, callback); }.bind(this));
 };
 
-PostmanTransport.prototype.close = function(){
+MailPreviewTransport.prototype.close = function(){
   var args     = Array.prototype.slice.call(arguments);
   var callback = args.pop();
   if (typeof callback == 'function') callback();
 };
 
-PostmanTransport.prototype.process = function(mail, callback){
+MailPreviewTransport.prototype.process = function(mail, callback){
   var timestamp = (new Date).toISOString().replace(/[-:TZ\.]/g, '');
   var directory = path.join(this.dir, timestamp);
   mkdirp.sync(directory);

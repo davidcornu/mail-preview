@@ -1,11 +1,11 @@
-var assert     = require('assert');
-var path       = require('path');
-var fs         = require('fs');
-var Postman    = require('./postman');
-var nodemailer = require('nodemailer');
+var assert      = require('assert');
+var path        = require('path');
+var fs          = require('fs');
+var MailPreview = require('./');
+var nodemailer  = require('nodemailer');
 
 var tmpdir    = path.join(__dirname, 'tmp', 'nodemailer');
-var transport = nodemailer.createTransport('Postman', {
+var transport = nodemailer.createTransport('MailPreview', {
   dir: tmpdir,
   browser: false
 });
@@ -33,10 +33,10 @@ var email = {
   ].join('<br>\n')
 };
 
-describe('Postman', function(){
+describe('MailPreview', function(){
 
   it('should add itself to nodemailer\'s transports', function(){
-    assert(nodemailer.Transport.transports.POSTMAN);
+    assert(nodemailer.Transport.transports.MAILPREVIEW);
   });
 
   // TODO
