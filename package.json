@@ -1,0 +1,30 @@
+{
+  "name": "Postman",
+  "author": "David Cornu",
+  "version": "1.0.0pre",
+  "description": "Preview your Nodemailer emails in your browser.",
+  "license": "BSD",
+  "keywords": [
+    "Nodemailer",
+    "Email",
+    "Development",
+    "Testing",
+    "Mail"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davidcornu/postman.git"
+  },
+  "main": "postman.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
+  "dependencies": {
+    "mkdirp": "~0.3.4",
+    "jade": "~0.28.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1",
+    "nodemailer": "*"
+  }
+}

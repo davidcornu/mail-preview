@@ -1,0 +1,96 @@
+meta(content='text/html', charset=charset, 'http-equiv'='Content-Type')
+
+if message.subject
+  title= message.subject
+else
+  title='No Subject'
+
+style(type='text/css')
+  #message-headers {
+    width: 100%;
+    padding: 10px 0 0 0;
+    margin: 0;
+    background: #fff;
+    font-size: 12px;
+    font-family: "Lucida Grande";
+    border-bottom: 1px solid #dedede;
+    overflow: auto;
+  }
+
+  #message-headers dl {
+    float: left;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+
+  #message-headers dt {
+    width: 92px;
+    padding: 1px;
+    margin: 0;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    color: #7f7f7f;
+  }
+
+  #message-headers dd {
+    margin: 0 0 0 102px;
+    padding: 1px;
+  }
+
+  #message-headers p.alternate {
+    float: right;
+    margin: 0;
+  }
+
+  #message-headers p.alternate a {
+    color: #09c;
+  }
+
+  pre#message-body {
+    padding: 10px;
+    word-wrap: break-word;
+  }
+
+
+div#message-headers
+  dl
+    dt From:
+    dd= message.from
+
+    if message.to
+      dt To:
+      dd= message.to
+
+    if message.cc
+      dt CC:
+      dd= message.cc
+
+    if message.bcc
+      dt BCC:
+      dd= message.bcc
+
+    if message.replyTo
+      dt Reply-To:
+      dd= message.replyTo
+
+    dt Subject:
+    dd
+      strong
+        if message.subject
+          = message.subject
+        else
+          | No Subject
+
+  if multipart
+    p.alternate
+      if part == 'text'
+        a(href='message_html.html') View HTML version
+      else
+        a(href='message_text.html') View plain text version
+
+if part == 'text'
+  pre#message-body
+    != content
+else
+  != content
