@@ -1,8 +1,9 @@
 var assert      = require('assert');
 var path        = require('path');
 var fs          = require('fs');
-var MailPreview = require('./');
 var nodemailer  = require('nodemailer');
+
+require('./');
 
 var tmpdir    = path.join(__dirname, 'tmp', 'nodemailer');
 var transport = nodemailer.createTransport('MailPreview', {
