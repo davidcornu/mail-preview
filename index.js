@@ -5,7 +5,8 @@ var exec   = require('child_process').exec;
 var jade   = require('jade');
 var os     = require('os');
 
-var template = jade.compile(fs.readFileSync('./template.jade', 'utf-8'));
+var tmplPath = path.join(__dirname, 'template.jade');
+var template = jade.compile(fs.readFileSync(tmplPath, 'utf-8'));
 
 (function(){
   var nodemailer = require('nodemailer');
