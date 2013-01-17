@@ -1,7 +1,7 @@
 {
   "name": "mail-preview",
   "author": "David Cornu",
-  "version": "1.0.0pre",
+  "version": "0.0.1",
   "description": "Preview your Nodemailer emails in your browser.",
   "license": "BSD",
   "keywords": [
