@@ -33,7 +33,7 @@ browser (Inspired by [Letter Opener](https://github.com/ryanb/letter_opener)).
 
 ## Development
 
-Clone the reop
+Clone the repo
 
 ```
 $ git clone git@github.com:davidcornu/mail-preview.git
