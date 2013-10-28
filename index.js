@@ -4,6 +4,7 @@ var fs     = require('fs');
 var exec   = require('child_process').exec;
 var jade   = require('jade');
 var os     = require('os');
+var open   = require('open');
 
 var tmplPath = path.join(__dirname, 'template.jade');
 var template = jade.compile(fs.readFileSync(tmplPath, 'utf-8'));
@@ -56,9 +57,9 @@ MailPreviewTransport.prototype.process = function(mail, callback){
     files[part] = filename;
   });
 
-  if (this.browser && os.platform() == 'darwin') {
-    exec('open ' + (files.html || files.text), function(err){ callback(err); });
-  } else {
-    callback();
+  if (this.browser) {
+    open((files.html || files.text));
   }
+  callback();
+  
 };
