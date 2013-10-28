@@ -23,7 +23,7 @@
   "dependencies": {
     "mkdirp": "~0.3.4",
     "jade": "~0.28.1",
-    "node-open": "0.0.4"
+    "open": "0.0.4"
   },
   "devDependencies": {
     "mocha": "~1.8.1",
