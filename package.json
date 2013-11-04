@@ -1,7 +1,7 @@
 {
   "name": "mail-preview",
   "author": "David Cornu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Preview your Nodemailer emails in your browser.",
   "license": "BSD",
   "keywords": [
@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "mkdirp": "~0.3.4",
-    "jade": "~0.28.1"
+    "jade": "~0.28.1",
+    "open": "0.0.4"
   },
   "devDependencies": {
     "mocha": "~1.8.1",
