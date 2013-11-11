@@ -24,7 +24,7 @@ browser (Inspired by [Letter Opener](https://github.com/ryanb/letter_opener)).
 
     var transport = nodemailer.createTransport('MailPreview', {
       dir: tmpdir,  // defaults to ./tmp/nodemailer
-      browser: true // open sent email in browser (mac only, defaults to true)
+      browser: true // open sent email in browser (defaults to true)
     });
     ```
 
