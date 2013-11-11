@@ -49,9 +49,7 @@ MailPreviewTransport.prototype._process = function(mail, callback){
       part:      part
     });
 
-    fs.writeFileSync(filename, output, {
-      encoding: mail.options.charset || 'utf-8'
-    });
+    fs.writeFileSync(filename, output, mail.options.charset || 'utf-8');
 
     files[part] = filename;
   });
