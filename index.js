@@ -1,9 +1,7 @@
 var path   = require('path');
 var mkdirp = require('mkdirp');
 var fs     = require('fs');
-var exec   = require('child_process').exec;
 var jade   = require('jade');
-var os     = require('os');
 var open   = require('open');
 
 var tmplPath = path.join(__dirname, 'template.jade');
@@ -23,16 +21,14 @@ function MailPreviewTransport(options){
 
 MailPreviewTransport.prototype.sendMail = function(mail, callback){
   callback = callback || function(){};
-  process.nextTick(function(){ this.process(mail, callback); }.bind(this));
+  process.nextTick(function(){ this._process(mail, callback); }.bind(this));
 };
 
-MailPreviewTransport.prototype.close = function(){
-  var args     = Array.prototype.slice.call(arguments);
-  var callback = args.pop();
+MailPreviewTransport.prototype.close = function(callback){
   if (typeof callback == 'function') callback();
 };
 
-MailPreviewTransport.prototype.process = function(mail, callback){
+MailPreviewTransport.prototype._process = function(mail, callback){
   var timestamp = (new Date).toISOString().replace(/[-:TZ\.]/g, '');
   var directory = path.join(this.dir, timestamp);
   mkdirp.sync(directory);
@@ -44,22 +40,23 @@ MailPreviewTransport.prototype.process = function(mail, callback){
     if (!mail._message[p]) return;
     var part     = (p == 'body' ? 'text' : p);
     var filename = path.join(directory, 'message_' + part + '.html');
-    var file     = fs.createWriteStream(filename, {encoding: mail.options.charset || 'utf-8'});
-    var output   = template({
-      message: mail._message,
-      charset: mail.options.charset || 'utf-8',
-      content: mail._message[p],
+
+    var output = template({
+      message:   mail._message,
+      charset:   mail.options.charset || 'utf-8',
+      content:   mail._message[p],
       multipart: multipart,
-      part: part
+      part:      part
     });
-    file.write(output);
-    file.end();
+
+    fs.writeFileSync(filename, output, {
+      encoding: mail.options.charset || 'utf-8'
+    });
+
     files[part] = filename;
   });
 
-  if (this.browser) {
-    open((files.html || files.text));
-  }
-  callback();
-  
+  if (this.browser) open(files.html || files.text);
+
+  callback(null, files);
 };
